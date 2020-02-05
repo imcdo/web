@@ -7,7 +7,7 @@ import { Chart } from 'react-google-charts';
 
 import Processor from './Processor';
 import Util from '../../_common/util';
-//import ChartProcessor from './processor/ChartProcessor';
+import firebase from '../../_common/firebase';
 
 class CGCourseContent extends React.Component {
     constructor(props) {
@@ -25,8 +25,14 @@ class CGCourseContent extends React.Component {
 
     // Only called once when created, not every render
     async componentDidMount() {
-        let db = this.props.db;
-        //console.log(`CGCourseContent#componentDidMount() -> ${this.props.course}`)
+        
+        // https://firebase.google.com/docs/reference/js/firebase.analytics.EventParams
+        firebase.analytics().logEvent('select_content', {
+            content_type: 'course_content',
+            item_id: this.props.course
+        });
+        
+        let db = firebase.firestore();
 
         console.time(`firestore (${this.props.course})`);
 

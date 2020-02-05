@@ -10,6 +10,8 @@ import PropTypes from 'prop-types';
 
 import CGSelectionBadge from './CGSelectionBadge';
 
+import firebase from '../../_common/firebase';
+
 class CGSearchForm extends React.Component {
     constructor(props) {
         super(props);
@@ -99,13 +101,19 @@ class CGSearchForm extends React.Component {
             //window.location.hash = this.generateUrlHash();
             callback()
         })
+        
+        // https://support.google.com/firebase/answer/6317498?hl=en&ref_topic=6317484
+        firebase.analytics().logEvent('search', {
+            search_term: field.value.toUpperCase()
+        });
+        
         field.value = ''
     }
 
     // Input box
     handleSubmit(event) {
         if(event) event.preventDefault()
-
+        
         // Add the query
         this.pullFieldToSelection(() => {
             this.props.onQuery(this.state.selection)

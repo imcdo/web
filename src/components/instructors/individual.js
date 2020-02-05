@@ -7,6 +7,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Table from 'react-bootstrap/Table';
 
 import Util from '../_common/util';
+import firebase from '../_common/firebase';
 
 import { Link } from 'react-router-dom';
 
@@ -32,12 +33,19 @@ class IndividualInstructor extends Component {
             this.setState({
                 loading: true,
             })
-            let db = this.props.db;
+            let db = firebase.firestore();
             db.collection('instructors')
             .where('fullName', '==', this.props.fullName)
             .get()
             .then((querySnapshot) => {
                 if(querySnapshot.docs.length > 0) {
+                    
+                    // https://firebase.google.com/docs/reference/js/firebase.analytics.EventParams
+                    firebase.analytics().logEvent('select_content', {
+                        content_type: 'instructor',
+                        item_id: this.props.fullName
+                    });
+                    
                     let doc = querySnapshot.docs[0].data();
                     // update the interface with the fetched data so far
                     this.setState({

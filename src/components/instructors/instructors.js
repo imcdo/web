@@ -9,6 +9,8 @@ import anime from 'animejs/lib/anime.es.js';
 
 import InstructorResultCard from './InstructorResultCard'
 
+import firebase from '../_common/firebase';
+
 import './instructors.scss';
 
 class Instructors extends Component {
@@ -28,7 +30,12 @@ class Instructors extends Component {
         let field = document.querySelector('form#search input[type=text]');
 
         (async () => {
-            let db = this.props.db;
+            // https://support.google.com/firebase/answer/6317498?hl=en&ref_topic=6317484
+            firebase.analytics().logEvent('search', {
+                search_term: field.value.toLowerCase()
+            });
+            
+            let db = firebase.firestore();
             db.collection('instructors')
             .where('keywords', 'array-contains', field.value.toLowerCase())
             .orderBy('lastName')
