@@ -8,6 +8,20 @@
     hr {
         border-top-color: rgba(255,255,255,0.1);
     }
+
+    .dropdown-menu.show {
+        background: lighten($color: $dm-fore, $amount: 7%);
+
+        a.dropdown-item {
+            color: $dm-text;
+            &:hover {
+                background: lighten($color:$dm-fore, $amount: 10%);
+            }
+            &:focus {
+                background: lighten($color:$dm-fore, $amount: 12%);
+            }
+        }
+    }
 }
 
 sup.beta {
@@ -29,7 +43,29 @@ nav.cg-navbar {
                 margin-top: calc(1.5rem/2 - 16px/2 + 1px);
             }
         }
+        // Fixes the dropdown disclosure triangle
+        &.dropdown-toggle::after {
+            margin-top: 0.6em;
+        }
+        &.dropdown-toggle::before {
+            border: 0;
+            content: "▾";
+        }
     }
+    a.dropdown-item {
+        svg.MuiSvgIcon-root {
+            height: 16px;
+            width: 16px;
+            margin-top: 0;
+            line-height: 24px;
+            margin-right: 0.1em;
+    
+            @media (min-width: 992px) {
+                //margin-top: calc(1.5rem/2 - 16px/2 + 1px);
+            }
+        }
+    }
+    
 }
 
 // iOS fix

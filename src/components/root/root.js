@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -17,8 +18,10 @@ import IndividualCourse from '../courses/individual';
 import Instructors from '../instructors/instructors';
 import IndividualInstructor from '../instructors/individual';
 import About from '../about/about';
+import Swagger from '../swagger/swagger'
 
 import Lock from '@material-ui/icons/Lock';
+import InsertLink from '@material-ui/icons/InsertLink';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -76,8 +79,11 @@ class Root extends Component {
                         <Nav.Link as={Link} to="/groups" disabled={true}><Lock/>Groups</Nav.Link>
                     </Nav>
                     <Nav className="justify-content-end">
-                        <Nav.Link href="https://github.com/cougargrades/web/wiki/Feedback">Feedback</Nav.Link>
-                        <Nav.Link href="https://cougargrades.github.io/blog/">Updates</Nav.Link>
+                        <NavDropdown title="Resources" className="dropleft">
+                            <NavDropdown.Item href="https://github.com/cougargrades/web/wiki/Feedback">Feedback <InsertLink /></NavDropdown.Item>
+                            <NavDropdown.Item href="https://cougargrades.github.io/blog/">Developer Updates <InsertLink /></NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/swagger">API Docs</NavDropdown.Item>
+                        </NavDropdown>
                         <Nav.Link as={Link} to="/about">About</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
@@ -91,7 +97,8 @@ class Root extends Component {
                 <Route path="/i/:name" component={( location, match ) => <IndividualInstructor firebase={this.firebase} db={this.db} fullName={location.match.params.name} location={location} /> } />
                 {/* <Route path="/groups" exact component={Home} /> */}
                 <Route path="/about" component={() => <About firebase={this.firebase} db={this.db} />} />
-                <Route component={NotFound} />
+                <Route path="/swagger" component={Swagger} />
+                {/* <Route component={NotFound} /> */}
             </Switch>
         </Router>
         );
