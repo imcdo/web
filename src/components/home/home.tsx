@@ -16,15 +16,15 @@ type BlogEntry = {
     content: string
 }
 
-type HomeState = {
+type State = {
     latestTerm: string,
     blog: BlogEntry[],
     colorScheme: 'light' | 'dark'
 }
 
 export const Home: React.FC = () => {
-    const [latestTerm, setLatestTerm] = useState<HomeState['latestTerm']>('...')
-    const [blog, setBlog] = useState<HomeState['blog']>([])
+    const [latestTerm, setLatestTerm] = useState<State['latestTerm']>('...')
+    const [blog, setBlog] = useState<State['blog']>([])
 
     async function updateBlogData() {
         let res = await fetch('https://cougargrades.github.io/blog/atom.xml')

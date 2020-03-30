@@ -11,7 +11,7 @@ import { Blurb } from './blurb'
 import { Brand } from './brand'
 import { Home } from '../home/home'
 import { About } from '../about/about'
-//import Instructors from '../instructors/instructors'
+import { IndividualInstructor } from '../instructors/individual'
 
 
 export const Root: React.FC = () => {
@@ -55,8 +55,8 @@ export const Root: React.FC = () => {
                 <Route path="/instructors">
                     {/* <Instructors /> */}
                 </Route>
-                <Route path="/i/:name">
-                    {/* <IndividualInstructor /> */}
+                <Route path="/i/:fullName">
+                    <IndividualInstructor />
                 </Route>
                 <Route path="/api" exact>
                     <Blurb>

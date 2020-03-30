@@ -1,7 +1,8 @@
 
-import * as subjectData from './subjects.json';
+import { Departments } from '../models';
 
-const Subjects: { [key: string]: string } = subjectData;
+const Subjects = require('./subjects.json')
+
 export { Subjects }
 
 /**
@@ -39,7 +40,7 @@ export async function sleep(ms: number): Promise<void> {
  * Generates string such as: "Mathematics, Biology"
  * for when describing an instructor
  */
-export function subject_str(dict: object): string {
+export function subject_str(dict: Departments): string {
     let depts = Object.keys(dict)
     let str = ''
     for (let i = 0; i < depts.length; i++) {

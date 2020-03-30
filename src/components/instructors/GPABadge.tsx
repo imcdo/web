@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 
 import './GPABadge.scss';
 
-export default class GPABadge extends Component {
+type Props = {
+    value: number,
+    stddev: number,
+    caption: string
+}
 
-    color(n) {
+export default class GPABadge extends Component<Props> {
+
+    color(n: number) {
         // 4.0 is rarely scored in practice
         if (n > 3.5) return 'grade-a'
         if (n > 2.5) return 'grade-b'
@@ -33,7 +39,7 @@ export default class GPABadge extends Component {
      * ============
      * sigma < 0.149 
      */
-    sd_color(sd) {
+    sd_color(sd: number) {
         if (sd < 0.149) return 'grade-a'
         if (sd < 0.286) return 'grade-b'
         if (sd < 0.425) return 'grade-c'
@@ -41,7 +47,7 @@ export default class GPABadge extends Component {
         return 'grade-i'
     }
 
-    caption(n) {
+    caption(n: number) {
         if (n > 3.5) return 'A average'
         if (n > 2.5) return 'B average'
         if (n > 1.5) return 'C average'
@@ -52,7 +58,7 @@ export default class GPABadge extends Component {
     }
 
     render() {
-        if(typeof this.props.value === 'number') {
+        if (typeof this.props.value === 'number') {
             return (
                 <div>
                     <span className={`gpa-badge ${this.color(this.props.value)}`} title="Grade Point Average">{`${this.props.value.toFixed(2)} GPA`}</span>
@@ -64,6 +70,6 @@ export default class GPABadge extends Component {
         else {
             return <></>
         }
-        
+
     }
 }
