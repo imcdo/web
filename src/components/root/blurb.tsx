@@ -8,7 +8,6 @@ type BlurbProps = {
 
 export const Blurb: React.FC<BlurbProps> = (props: BlurbProps) => {
     const location = useLocation()
-
     const styles: CSSProperties = {
         textAlign: 'center',
         paddingTop: '15px'

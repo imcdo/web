@@ -9,6 +9,7 @@ import './root.scss'
 
 import { Blurb } from './blurb'
 import { Brand } from './brand'
+import { Home } from '../home/home'
 //import Instructors from '../instructors/instructors'
 
 
@@ -42,7 +43,7 @@ export const Root: React.FC = () => {
             </Navbar>
             <Switch>
                 <Route path="/" exact>
-                    {/* <Home /> */}
+                    <Home />
                 </Route>
                 <Route path="/courses">
                     {/* <Courses /> */}
