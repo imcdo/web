@@ -10,6 +10,7 @@ import './root.scss'
 import { Blurb } from './blurb'
 import { Brand } from './brand'
 import { Home } from '../home/home'
+import { About } from '../about/about'
 //import Instructors from '../instructors/instructors'
 
 
@@ -61,6 +62,9 @@ export const Root: React.FC = () => {
                     <Blurb>
                         <p>Did you mean to go to <code><a href="/api/">/api/</a></code> (with the trailing slash)?</p>
                     </Blurb>
+                </Route>
+                <Route path="/about">
+                    <About />
                 </Route>
                 <Route>
                     <Blurb http404 />
