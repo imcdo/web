@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState}  from 'react';
 
 import anime from 'animejs/lib/anime.es.js';
 
@@ -9,6 +9,10 @@ import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 
 import CGSelectionBadge from './CGSelectionBadge';
+
+// const CGSearchForm = ({selection, }) => {
+
+// } 
 
 class CGSearchForm extends React.Component {
     constructor(props) {

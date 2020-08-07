@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 
@@ -7,31 +7,23 @@ import './courses.scss';
 import CGSearchForm from './form/CGSearchForm';
 import CGCourseResults from './results/CGCourseResults';
 
-export default class Courses extends Component {
-    constructor(props) {
-        super(props);
-        if(props.location && props.location.state && props.location.state.selection && props.location.state.selection.length > 0) {
-            //console.log('passed into /courses: ',props.location.state.selection)
-            this.state = {
-                selection: props.location.state.selection
-            }
-        }
-        else {
-            this.state = {
-                selection: []
-            }
-        }
-    }
 
-    handleQuery(selection) {
+const Courses = ({location}) => {
+    let initState = []
+    if (location 
+        && location.state 
+        && location.state.selection 
+        && location.state.selection.length > 0)
+        initState = location.state.selection;
+    
+    const [selection, setSelection] = useState(initState);
+    
+    const handleQuery = (selection) => {
         //console.log('query handled: ',selection)
-        this.setState({
-            selection: selection.slice()
-        })
-    }
+        setSelection(selection.slice());
+    };
 
-    render() {
-        return (
+    return(
         <Container>
             <div>
                 <h2>Course search</h2>
@@ -41,9 +33,10 @@ export default class Courses extends Component {
                     An interactive table will also be generated that shows more detailed information, such as the section number of the class, the number of As, Bs, Cs, and withdraws.
                 </p>
             </div>
-            <CGSearchForm selection={this.state.selection} onQuery={(val) => this.handleQuery(val)}/>
-            <CGCourseResults selection={this.state.selection} />
+            <CGSearchForm selection={selection} onQuery={handleQuery}/>
+            <CGCourseResults selection={selection} />
         </Container>
-        );
-    }
-}
+    );
+};
+
+export default Courses;

@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -8,10 +8,10 @@ import Col from 'react-bootstrap/Col';
 
 import './about.scss';
 
-export default class About extends Component {
-    render() {
-        return (
-            <Container className="about">
+
+const About = () => {
+    return(
+        <Container className="about">
                 <Row>
                     <Col sm={3}>
                         <picture className="shasta">
@@ -73,6 +73,7 @@ export default class About extends Component {
                     </Col>
                 </Row>
             </Container>
-        );
-    }
-}
+    );
+};
+
+export default About
